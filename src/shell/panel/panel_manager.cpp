@@ -484,8 +484,19 @@ void PanelManager::openPanel(const std::string& panelId, PanelOpenRequest reques
 
   auto panelWidth = static_cast<std::uint32_t>(m_activePanel->preferredWidth());
   auto panelHeight = static_cast<std::uint32_t>(m_activePanel->preferredHeight());
-  auto barConfig = resolvePanelBarConfig(m_config, m_platform, request.output, request.sourceBarName);
-  m_sourceBarName = request.sourceBarName.empty() ? barConfig.name : std::string(request.sourceBarName);
+  std::string_view effectiveSourceBarName = request.sourceBarName;
+  if (m_config != nullptr) {
+    for (const auto& bar : m_config->config().bars) {
+      if (bar.isPanelParent) {
+        effectiveSourceBarName = bar.name;
+        break;
+      }
+    }
+  }
+  auto barConfig = resolvePanelBarConfig(m_config, m_platform, request.output, effectiveSourceBarName);
+  m_sourceBarName = effectiveSourceBarName.empty() ? barConfig.name : std::string(effectiveSourceBarName);
+  // parent panel code :3
+
   if (m_attachedPanelLayerProvider != nullptr) {
     if (auto layer = m_attachedPanelLayerProvider(request.output, m_sourceBarName); layer.has_value()) {
       barConfig.layer = *layer;

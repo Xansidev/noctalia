@@ -1664,6 +1664,10 @@
           "description": "Pixels an attached panel overlaps the bar edge to hide the seam (adjust if you see a line or gap)",
           "label": "Panel Overlap"
         },
+        "panel-parent": {
+          "description": "All attached panels always dock to this bar, regardless of which bar's widget opened them.",
+          "label": "Anchor Panels Here"
+        },
         "position": {
           "description": "Which screen edge the bar sits on"
         },

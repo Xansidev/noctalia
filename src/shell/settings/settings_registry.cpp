@@ -2630,6 +2630,11 @@ namespace settings {
           "exclusive zone"
       ));
       entries.push_back(makeEntry(
+          section, "general", tr("settings.schema.bar.panel-parent.label"),
+          tr("settings.schema.bar.panel-parent.description"), path("panel_parent"), ToggleSetting{bar.isPanelParent},
+          "anchor pin parent control center attach dock"
+      ));
+      entries.push_back(makeEntry(
           section, "general", tr("settings.schema.bar.layer.label"), tr("settings.schema.bar.layer.description"),
           path("layer"),
           asSegmented(plainSelect(

@@ -1959,6 +1959,7 @@ namespace noctalia::config::schema {
         field(&BarConfig::widgetCapsuleOpacity, "capsule_opacity", kBarOpacityRange),
         capsuleBorderField(&BarConfig::widgetCapsuleBorder, &BarConfig::widgetCapsuleBorderSpecified, "capsule_border"),
         field(&BarConfig::hoverHighlight, "hover_highlight"),
+        field(&BarConfig::isPanelParent, "panel_parent"),
         subTable(&BarConfig::deadZone, "dead_zone", barDeadZoneSchema()),
     };
     return s;

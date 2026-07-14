@@ -178,6 +178,12 @@ struct BarConfig {
   std::optional<ColorSpec> widgetCapsuleBorder;
   // Soft tint of a widget's foreground color over the widget under the pointer (per member in capsule groups).
   bool hoverHighlight = true;
+
+  // When true, every attached panel (Control Center, Audio tab, etc.) docks to THIS bar
+  // regardless of which bar's widget was clicked to open it. Only one bar should have this
+  // set at a time; ConfigService::parseConfigTable enforces that on load.
+  bool isPanelParent = false;
+
   BarDeadZoneConfig deadZone;
   std::vector<BarMonitorOverride> monitorOverrides;
 

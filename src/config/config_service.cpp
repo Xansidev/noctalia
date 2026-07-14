@@ -1620,6 +1620,17 @@ void ConfigService::parseConfigTable(
           break;
         }
       }
+      // Only one bar may be the panel parent; if config (hand-edited or stale) has more
+      // than one, keep the first in final order and clear the rest.
+      bool sawPanelParent = false;
+      for (auto& bar : config.bars) {
+        if (bar.isPanelParent) {
+          if (sawPanelParent) {
+            bar.isPanelParent = false;
+          }
+          sawPanelParent = true;
+        }
+      }
     }
 
     for (std::size_t i = 0; i < parsedBars.size(); ++i) {
